@@ -1,0 +1,27 @@
+module tb;
+  reg  [5:0] a, b, c;
+  reg  [3:0] sel;
+  wire [5:0] out;
+  logic [3:0] sel1;
+  
+  my_con 	m0 ( .a(a),
+                .b(b),
+                .c(c),
+                .sel(sel),
+                .out(out));
+  initial begin
+    sel1 = 4'b0011;
+    $monitor ("[%0t] a=0x%0h b=0x%0h c=0x%0h sel=0b%b out=0x%0h", $time, a, b, c, sel, out);
+    for (int i = 0; i < 10; i = i+1) begin
+      a <= 6'b000111;
+      b <= 6'b111000;
+      c <= 6'b011100;
+      sel = sel1;
+      
+      #10;
+      
+      $dumpfile("dump.vcd"); $dumpvars;
+      sel1=sel1<<1;
+    end
+  end
+endmodule

@@ -1,0 +1,38 @@
+module tb;
+  reg [3:0] out;
+  logic [5:0] sel;
+  reg  [5:0] sel1;
+ 
+  initial begin
+    sel=6'b000110;
+    for (int i = 0; i < 10; i = i+1) begin
+    
+      if (sel1==6'b000111)
+       out<=4'b1000;
+      else if (sel1==6'b000110)
+       out<=4'b1000;
+      else if (sel1==6'b000101)
+       out<=4'b1000;
+      else if (sel1==6'b000011)
+       out<=4'b1000;
+    else if (sel1==6'b111000)
+       out<=4'b0110;
+    else if (sel1==6'b110000)
+       out<=4'b0110;
+    else if (sel1==6'b101000)
+       out<=4'b0110;
+    else if (sel1==6'b011000)
+       out<=4'b0110;
+    else if (sel1==6'b011100)
+       out<=4'b1100;
+    else if (sel1==6'b010100)
+       out<=4'b1100;
+    else if (sel1==6'b001100)
+      out<=4'b1100;
+      sel1=sel;
+    #10;
+    sel=sel<<1;
+    $dumpfile("dump.vcd"); $dumpvars;
+    end
+    
+  end
